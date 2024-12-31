@@ -1,0 +1,12 @@
+unit DBmigrations.DBConnection;
+
+interface
+
+type
+  TDBConnection = class()
+
+  end;
+
+implementation
+
+end.

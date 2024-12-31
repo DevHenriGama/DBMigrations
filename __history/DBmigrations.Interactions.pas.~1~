@@ -1,0 +1,15 @@
+unit DBmigrations.Interactions;
+
+interface
+
+ type
+  TInteractions = class
+    private
+
+    public
+    constructor Create;
+    destructor Destroy;override;
+  end;
+implementation
+
+end.
