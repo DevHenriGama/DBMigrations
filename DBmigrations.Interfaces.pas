@@ -12,15 +12,25 @@ type
     function RunMigrations: IInteractions;
   end;
 
-  IDBConnection = interface
+  IConnectionParams = interface
     ['{AE29CE57-9209-484F-AB8B-4A453D8F6D5B}']
+    procedure SaveToSettings;
+    procedure LoadFromSettings;
+    function GetParamsAsString: string;
   end;
 
   IConfigManager = interface
     ['{A4E1CD42-0754-4E9A-93D3-CEB65078A480}']
-    function ReadValue(const Key: string;
-      const DefaultValue: string = ''): string;
-    procedure WriteValue(const Key, Value: string);
+    procedure SetConfiguracao(AChave, Valor: string);
+    function GetConfiguracao(AChave: string): string;
+    function HasSettingsFile: Boolean;
+    function ContainsKey(AKey: String): Boolean;
+
+  end;
+
+  IConnection = interface
+    ['{2FA710A9-03B6-4AB3-9B88-9BB8C1B6AEC1}']
+    function TestConnection: Boolean;
   end;
 
 implementation

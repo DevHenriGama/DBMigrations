@@ -1,0 +1,16 @@
+unit DBmigrations.Connection;
+
+interface
+
+type
+  TConnection = class(TInterfacedObject, IConnection)
+
+  private
+
+  public
+
+  end;
+
+implementation
+
+end.

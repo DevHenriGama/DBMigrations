@@ -1,0 +1,191 @@
+unit DBmigrations.DBConnection;
+
+interface
+
+uses
+  DBmigrations.Interfaces;
+
+type
+  TDatabaseType = (dtMySQL, dtPostgreSQL, dtSQLServer, dtSQLite, dtOracle,
+    dtFirebird, dtOther);
+
+  TConnectionParams = class(TInterfacedObject, IConnectionParams)
+  private
+    FDriverID: string;
+    FServer: string;
+    FPort: Integer;
+    FDatabase: string;
+    FUserName: string;
+    FPassword: string;
+    FCharacterSet: string;
+    FProtocol: string;
+    FDatabaseType: TDatabaseType;
+    FSettings: IConfigManager;
+    procedure ConfigureDefaultParams;
+  public
+    constructor Create(ADatabaseType: TDatabaseType); overload;
+    destructor Destroy; override;
+    class function New(ADatabaseType: TDatabaseType): IConnectionParams;
+    property DatabaseType: TDatabaseType read FDatabaseType write FDatabaseType;
+    property DriverID: string read FDriverID write FDriverID;
+    property Server: string read FServer write FServer;
+    property Port: Integer read FPort write FPort;
+    property Database: string read FDatabase write FDatabase;
+    property UserName: string read FUserName write FUserName;
+    property Password: string read FPassword write FPassword;
+    property CharacterSet: string read FCharacterSet write FCharacterSet;
+    property Protocol: string read FProtocol write FProtocol;
+    procedure SaveToSettings;
+    function GetParamsAsString: string;
+
+  end;
+
+implementation
+
+uses
+  System.SysUtils, System.Classes, DBmigrations.Settings;
+
+{ TConnectionParams }
+
+constructor TConnectionParams.Create(ADatabaseType: TDatabaseType);
+begin
+  inherited Create;
+  FSettings := TSettings.Create();
+  FDatabaseType := ADatabaseType;
+
+end;
+
+destructor TConnectionParams.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TConnectionParams.ConfigureDefaultParams;
+begin
+  case FDatabaseType of
+    dtMySQL:
+      begin
+        FDriverID := 'MySQL';
+        FServer := 'localhost';
+        FPort := 3306;
+        FDatabase := '';
+        FUserName := '';
+        FPassword := '';
+        FCharacterSet := 'utf8';
+      end;
+
+    dtPostgreSQL:
+      begin
+        FDriverID := 'PG';
+        FServer := 'localhost';
+        FPort := 5432;
+        FDatabase := '';
+        FUserName := '';
+        FPassword := '';
+      end;
+
+    dtSQLServer:
+      begin
+        FDriverID := 'MSSQL';
+        FServer := 'localhost';
+        FPort := 1433;
+        FDatabase := '';
+        FUserName := '';
+        FPassword := '';
+      end;
+
+    dtSQLite:
+      begin
+        FDriverID := 'SQLite';
+        FDatabase := 'database.db';
+      end;
+
+    dtOracle:
+      begin
+        FDriverID := 'Ora';
+        FServer := 'localhost';
+        FPort := 1521;
+        FDatabase := '';
+        FUserName := '';
+        FPassword := '';
+      end;
+
+    dtFirebird:
+      begin
+        FDriverID := 'FB';
+        FServer := 'localhost';
+        FPort := 3050;
+        FDatabase := '';
+        FUserName := '';
+        FPassword := '';
+        FProtocol := 'TCPIP';
+      end;
+
+    dtOther:
+      begin
+        FDriverID := '';
+        FServer := '';
+        FPort := 0;
+        FDatabase := '';
+        FUserName := '';
+        FPassword := '';
+      end;
+  end;
+end;
+
+function TConnectionParams.GetParamsAsString: string;
+var
+  Params: TStringList;
+begin
+  Params := TStringList.Create;
+  try
+    if FDriverID <> '' then
+      Params.Add('DriverID=' + FDriverID);
+    if FServer <> '' then
+      Params.Add('Server=' + FServer);
+    if FPort > 0 then
+      Params.Add('Port=' + FPort.ToString);
+    if FDatabase <> '' then
+      Params.Add('Database=' + FDatabase);
+    if FUserName <> '' then
+      Params.Add('User_Name=' + FUserName);
+    if FPassword <> '' then
+      Params.Add('Password=' + FPassword);
+    if FCharacterSet <> '' then
+      Params.Add('CharacterSet=' + FCharacterSet);
+    if FProtocol <> '' then
+      Params.Add('Protocol=' + FProtocol);
+
+    Result := Params.Text;
+  finally
+    Params.Free;
+  end;
+end;
+
+class function TConnectionParams.New(ADatabaseType: TDatabaseType)
+  : IConnectionParams;
+begin
+  Result := Self.Create(ADatabaseType);
+end;
+
+procedure TConnectionParams.SaveToSettings;
+begin
+  if not FSettings.ContainsKey('DriveID') then
+    ConfigureDefaultParams;
+
+  with FSettings do
+  begin
+    SetConfiguracao('DriveID', FDriverID);
+    SetConfiguracao('Server', FServer);
+    SetConfiguracao('Port', IntToStr(FPort));
+    SetConfiguracao('Database', FDatabase);
+    SetConfiguracao('User', FUserName);
+    SetConfiguracao('Passaword', FPassword);
+    SetConfiguracao('CharacterSet', FCharacterSet);
+    SetConfiguracao('Protol', FProtocol);
+  end;
+
+end;
+
+end.

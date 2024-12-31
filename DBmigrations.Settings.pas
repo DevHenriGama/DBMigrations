@@ -1,97 +1,167 @@
-unit DBmigrations.Settings;
+﻿unit DBmigrations.Settings;
 
 interface
 
 uses
-  System.Classes, System.JSON, System.IOUtils, DBmigrations.Interfaces;
+  System.SysUtils, System.JSON, System.IOUtils, System.NetEncoding,
+  DBmigrations.Interfaces;
 
 type
-  TConfigManager = class(TInterfacedObject,IConfigManager)
+  TSettings = class(TInterfacedObject, IConfigManager)
   private
-    FFileName: string;
-    FConfig: TJSONObject;
-    procedure LoadConfig;
-    procedure SaveConfig;
-    procedure CreateDefaultConfig;
+    FFilePath: string;
+    FJSON: TJSONObject;
+    FUseEncrypt: Boolean;
+
+  const
+    FileName = 'settings.json';
+
+  const
+    EncryptionKey = 'MinhaChaveSegura'; // Deve ser armazenada com seguran�a
+
+    function Encrypt(const Value: string): string;
+    function Decrypt(const Value: string): string;
+    procedure LoadFileSettings;
+    procedure SaveSettings;
   public
-    constructor Create(const AFileName: string = 'configDB.json');
+    constructor Create;
     destructor Destroy; override;
+    class function New: IConfigManager; overload;
+    property UseEncrypt: Boolean read FUseEncrypt write FUseEncrypt;
+    procedure SetConfiguracao(AChave, Valor: string);
+    function GetConfiguracao(AChave: string): string;
+    function HasSettingsFile: Boolean;
+    function ContainsKey(AKey: String): Boolean;
 
-    function ReadValue(const Key: string; const DefaultValue: string = ''): string;
-    procedure WriteValue(const Key, Value: string);
-
-    property FileName: string read FFileName;
   end;
+
+function Settings: IConfigManager;
 
 implementation
 
 uses
-  System.SysUtils;
+  System.Classes;
 
-{ TConfigManager }
+{ TMACConfig }
 
-constructor TConfigManager.Create(const AFileName: string);
+function Settings: IConfigManager;
 begin
-  inherited Create;
-  FFileName := TPath.Combine(TDirectory.GetCurrentDirectory, AFileName);
-
-  if not TFile.Exists(FFileName) then
-    CreateDefaultConfig
-  else
-    LoadConfig;
+  Result := TSettings.Create;
 end;
 
-destructor TConfigManager.Destroy;
+function TSettings.ContainsKey(AKey: String): Boolean;
 begin
-  FConfig.Free;
+  Result := False;
+
+  if HasSettingsFile then
+    Result := FJSON.GetValue(AKey) <> NIL;
+
+end;
+
+constructor TSettings.Create;
+begin
+  FFilePath := TPath.Combine(ExtractFilePath(ParamStr(0)), FileName);
+  FUseEncrypt := False;
+  FJSON := TJSONObject.Create;
+  LoadFileSettings;
+end;
+
+destructor TSettings.Destroy;
+begin
+  SaveSettings;
+  FJSON.Free;
   inherited;
 end;
 
-procedure TConfigManager.CreateDefaultConfig;
+function TSettings.Encrypt(const Value: string): string;
 begin
-  FConfig := TJSONObject.Create;
-  FConfig.AddPair('AppName', 'MyApplication');
-  FConfig.AddPair('Version', '1.0.0');
-  FConfig.AddPair('DefaultSetting', 'Value');
-  SaveConfig;
+  if FUseEncrypt then
+    Result := TNetEncoding.Base64.Encode(Value)
+  else
+    Result := Value;
 end;
 
-procedure TConfigManager.LoadConfig;
-var
-  JSONString: string;
+function TSettings.Decrypt(const Value: string): string;
 begin
-  JSONString := TFile.ReadAllText(FFileName);
-  FConfig := TJSONObject.ParseJSONValue(JSONString) as TJSONObject;
+  if FUseEncrypt then
+    Result := TNetEncoding.Base64.Decode(Value)
+  else
+    Result := Value;
 
-  if FConfig = nil then
-    raise Exception.Create('Erro ao carregar o arquivo de configura��o. JSON inv�lido.');
 end;
 
-procedure TConfigManager.SaveConfig;
+function TSettings.GetConfiguracao(AChave: string): string;
 var
-  JSONString: string;
-  StringWriter: TStringWriter;
+  Value: TJSONValue;
 begin
-  StringWriter := TStringWriter.Create;
+  Value := FJSON.GetValue(AChave);
+  if Assigned(Value) then
+    Result := Decrypt(Value.Value)
+  else
+    Result := '';
+end;
+
+function TSettings.HasSettingsFile: Boolean;
+begin
+  Result := FileExists(FFilePath);
+end;
+
+procedure TSettings.SetConfiguracao(AChave, Valor: string);
+var
+  FValue: string;
+begin
+  if FJSON.TryGetValue<string>(AChave, FValue) then
+    FJSON.RemovePair(AChave);
+
+  FJSON.AddPair(AChave, Encrypt(Valor));
+end;
+
+procedure TSettings.LoadFileSettings;
+var
+  FileContent: string;
+begin
+  if not TFile.Exists(FFilePath) then
+  begin
+    FJSON.AddPair('DBMigrations', '1.0');
+    SaveSettings;
+    Exit;
+  end;
+
   try
-    JSONString := StringWriter.ToString;
-    TFile.WriteAllText(FFileName, JSONString, TEncoding.UTF8);
-  finally
-    StringWriter.Free;
+    FileContent := TFile.ReadAllText(FFilePath);
+
+    FJSON.Free;
+    FJSON := TJSONObject.ParseJSONValue(FileContent) as TJSONObject;
+    if not Assigned(FJSON) then
+      raise Exception.Create('Arquivo de configuração inválido.');
+  except
+    on E: Exception do
+    begin
+      FJSON := TJSONObject.Create;
+      raise Exception.CreateFmt('Erro ao carregar configuração: %s',
+        [E.Message]);
+    end;
   end;
 end;
 
-function TConfigManager.ReadValue(const Key, DefaultValue: string): string;
+class function TSettings.New: IConfigManager;
 begin
-  if not FConfig.TryGetValue(Key, Result) then
-    Result := DefaultValue;
+  Result := Self.Create;
 end;
 
-procedure TConfigManager.WriteValue(const Key, Value: string);
+procedure TSettings.SaveSettings;
+var
+  JSONString: string;
 begin
-  FConfig.AddPair(Key, Value);
-  SaveConfig;
+  try
+    JSONString := FJSON.ToJSON;
+
+    TFile.WriteAllText(FFilePath, JSONString);
+  except
+    on E: Exception do
+      raise Exception.CreateFmt('Erro ao salvar configura��es: %s',
+        [E.Message]);
+  end;
 end;
 
 end.
-

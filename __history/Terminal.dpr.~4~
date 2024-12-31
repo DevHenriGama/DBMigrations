@@ -1,0 +1,18 @@
+program Terminal;
+
+uses
+  Vcl.Forms,
+  PASTerminal in 'PASTerminal.pas' {Form1},
+  DBmigrations.DBConnection in 'DBmigrations.DBConnection.pas',
+  DBmigrations.Interactions in 'DBmigrations.Interactions.pas',
+  DBmigrations.Interfaces in 'DBmigrations.Interfaces.pas',
+  DBmigrations.Settings in 'DBmigrations.Settings.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.
