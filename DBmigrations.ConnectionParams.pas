@@ -43,6 +43,7 @@ type
     procedure LoadFromSettings; overload;
     function GetTarget: IConnectionParams;
     function GetParamsAsString: string;
+    function ParamsInitalizared: Boolean;
 
   end;
 
@@ -217,6 +218,11 @@ end;
 class function TConnectionParams.New: IConnectionParams;
 begin
   Result := Self.Create;
+end;
+
+function TConnectionParams.ParamsInitalizared: Boolean;
+begin
+  Result := Settings.ContainsKey('DriveID');
 end;
 
 class function TConnectionParams.New(ADatabaseType: TDatabaseType)

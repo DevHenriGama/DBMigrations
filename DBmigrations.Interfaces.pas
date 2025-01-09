@@ -21,6 +21,7 @@ type
     procedure LoadFromSettings;
     function GetParamsAsString: string;
     function GetTarget: IConnectionParams;
+    function ParamsInitalizared: Boolean;
   end;
 
   IConfigManager = interface

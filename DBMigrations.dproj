@@ -2,7 +2,7 @@
     <PropertyGroup>
         <ProjectGuid>{22BAE254-EE4B-4F93-B867-1FEFEF590D9C}</ProjectGuid>
         <ProjectVersion>19.5</ProjectVersion>
-        <FrameworkType>None</FrameworkType>
+        <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -72,7 +72,7 @@
         <DCC_S>false</DCC_S>
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
-        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <SanitizedProjectName>DBMigrations</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
@@ -151,6 +151,10 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
+        <DCC_ExeOutput>bin</DCC_ExeOutput>
+        <DCC_DcuOutput>bin\libs</DCC_DcuOutput>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -162,11 +166,15 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="DBmigrations.Connection.pas"/>
+        <DCCReference Include="DBmigrations.ConnectionParams.pas"/>
+        <DCCReference Include="DBmigrations.DatabaseScheemas.pas"/>
+        <DCCReference Include="DBmigrations.DBQuery.pas"/>
+        <DCCReference Include="DBmigrations.Entity.pas"/>
         <DCCReference Include="DBmigrations.Interactions.pas"/>
         <DCCReference Include="DBmigrations.Interfaces.pas"/>
+        <DCCReference Include="DBmigrations.Migrations.pas"/>
         <DCCReference Include="DBmigrations.Settings.pas"/>
-        <DCCReference Include="DBmigrations.ConnectionParams.pas"/>
-        <DCCReference Include="DBmigrations.Connection.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

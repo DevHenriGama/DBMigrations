@@ -5,11 +5,15 @@ program DBMigrations;
 
 uses
   System.SysUtils,
-  DBmigrations.Interactions in 'DBmigrations.Interactions.pas',
-  DBmigrations.Interfaces in 'DBmigrations.Interfaces.pas',
-  DBmigrations.Settings in 'DBmigrations.Settings.pas',
-  DBmigrations.ConnectionParams in 'DBmigrations.ConnectionParams.pas',
-  DBmigrations.Connection in 'DBmigrations.Connection.pas';
+  DBMigrations.Connection in 'DBmigrations.Connection.pas',
+  DBMigrations.ConnectionParams in 'DBmigrations.ConnectionParams.pas',
+  DBMigrations.DatabaseScheemas in 'DBmigrations.DatabaseScheemas.pas',
+  DBMigrations.DBQuery in 'DBmigrations.DBQuery.pas',
+  DBMigrations.Entity in 'DBmigrations.Entity.pas',
+  DBMigrations.Interactions in 'DBmigrations.Interactions.pas',
+  DBMigrations.Interfaces in 'DBmigrations.Interfaces.pas',
+  DBMigrations.Migrations in 'DBmigrations.Migrations.pas',
+  DBMigrations.Settings in 'DBmigrations.Settings.pas';
 
 begin
   Writeln('Welcome DBMigrations 1.0');
@@ -48,7 +52,8 @@ begin
         Exit;
       end;
 
-      if TConfigManager.New.HasSettings then
+      if Settings.HasSettingsFile and TConnectionParams.New().ParamsInitalizared
+      then
       begin
         Writeln('Already initializated migrations.');
         Exit;
@@ -68,9 +73,38 @@ begin
         Exit;
       end;
 
-      // Se chegar aqui e pq não o parametro não foi informado corretamente
       Writeln(' ');
       Writeln('  --types. Write to see all drivers db');
+    end;
+
+    if ParamStr(1) = '--create' then
+    begin
+
+      if ParamStr(2) <> '' then
+      begin
+
+        TMigrations.New.CreateMigration(ParamStr(2));
+        Writeln(' ');
+        Writeln('  Migration Created');
+        Exit;
+      end;
+
+      Writeln(' ');
+      Writeln('  In second param type name of migration, please do not use special chars');
+    end;
+
+    if ParamStr(1) = '--run' then
+    begin
+      if not Settings.HasSettingsFile then
+      begin
+        Writeln(' ');
+        Writeln('  Migrations not initialized.');
+        Exit;
+      end;
+
+      TMigrations.New.RunMigrations;
+      Writeln(' ');
+      Writeln('  Migrations Runned');
     end;
 
   end
