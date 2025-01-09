@@ -49,7 +49,7 @@ begin
     Add('MIGRATION_NAME TEXT,');
     Add('TIME_EXECUTED TEXT,');
     Add('EXECUTED INTEGER DEFAULT (0)');
-    Add(', CREATED_AT TEXT DEFAULT (CURRENT_TIMESTAMP));');
+    Add(', CREATED_AT TEXT DEFAULT (datetime(''now'', ''localtime'')));');
   end;
 
   Result := FSQL;

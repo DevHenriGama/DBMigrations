@@ -20,6 +20,7 @@ type
     procedure CreateDatabase;
     function CreateMigrationFile(AFileName: string): string;
     function MigrationFileName(AName: string): string;
+    procedure RegisterMigration(AFileName: string);
   public
     constructor Create;
     destructor Destroy; override;
@@ -33,7 +34,7 @@ function Migrations: IMigrations;
 implementation
 
 uses
-  System.SysUtils, DBmigrations.Connection, System.Classes;
+  System.SysUtils, DBmigrations.Connection, System.Classes, System.IOUtils;
 
 { TMigrations }
 
@@ -77,14 +78,19 @@ var
 begin
   FFileName := CreateMigrationFile(AName);
 
-  // Faz a query registrando com o nome
+  RegisterMigration(FFileName);
 end;
 
 function TMigrations.CreateMigrationFile(AFileName: string): String;
 var
-  FName: string;
+  FName, a: string;
 begin
   FName := MigrationFileName(AFileName);
+
+  if not DirectoryExists(MigrationsDirPath) then
+    CreateDir(MigrationsDirPath);
+
+  TFile.WriteAllText(Format('%s\%s', [MigrationsDirPath, FName]), '');
 
   Result := FName;
 end;
@@ -107,7 +113,8 @@ end;
 
 function TMigrations.MigrationFileName(AName: string): string;
 begin
-  Result := Format('%s_%s.txt', [AName, FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now)]);
+  Result := Format('%s_%s.txt',
+    [AName, FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now)]);
 end;
 
 function TMigrations.MigrationsDirPath: string;
@@ -118,6 +125,19 @@ end;
 class function TMigrations.New: IMigrations;
 begin
   Result := Self.Create;
+end;
+
+procedure TMigrations.RegisterMigration(AFileName: string);
+var
+  Connection: IConnection;
+begin
+  Connection := TConnection.New(MigrationParams);
+  with DBQuery(Connection).Query do
+  begin
+    SQL.Add('INSERT INTO MIGRATIONS (MIGRATION_NAME) VALUES(:name)');
+    ParamByName('name').AsString := AFileName;
+    ExecSQL;
+  end;
 end;
 
 procedure TMigrations.RunMigrations;
