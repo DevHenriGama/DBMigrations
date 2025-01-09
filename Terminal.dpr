@@ -7,7 +7,10 @@ uses
   DBmigrations.Interactions in 'DBmigrations.Interactions.pas',
   DBmigrations.Interfaces in 'DBmigrations.Interfaces.pas',
   DBmigrations.Settings in 'DBmigrations.Settings.pas',
-  DBmigrations.Connection in 'DBmigrations.Connection.pas';
+  DBmigrations.Connection in 'DBmigrations.Connection.pas',
+  DBmigrations.Migrations in 'DBmigrations.Migrations.pas',
+  DBmigrations.DatabaseScheemas in 'DBmigrations.DatabaseScheemas.pas',
+  DBmigrations.DBQuery in 'DBmigrations.DBQuery.pas';
 
 {$R *.res}
 

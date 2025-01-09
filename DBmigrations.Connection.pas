@@ -15,33 +15,63 @@ uses
   FireDAC.Phys,
   FireDAC.VCLUI.Wait,
   Data.DB,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client,
+  FireDAC.Phys.SQLite,
+  FireDAC.Phys.SQLiteDef,
+  DBmigrations.ConnectionParams;
 
 type
   TConnection = class(TInterfacedObject, IConnection)
   private
-    FParams: IConnectionParams;
+    FParams: TConnectionParams;
     FConnection: TFDConnection;
   public
-    constructor Create(AParams: IConnectionParams);
+    constructor Create(AParams: TConnectionParams);
     destructor Destroy; override;
-    class function new(AParams: IConnectionParams): IConnection;
+    class function new(AParams: TConnectionParams): IConnection;
+    procedure CreateMigrationDatabase(APath: string);
     function TestConnection: Boolean;
+    function Connection: TFDConnection;
   end;
 
 implementation
 
+uses
+  System.IOUtils;
+
 { TConnection }
 
-constructor TConnection.Create(AParams: IConnectionParams);
+function TConnection.Connection: TFDConnection;
+begin
+  Result := FConnection;
+end;
+
+constructor TConnection.Create(AParams: TConnectionParams);
 begin
   FParams := AParams;
   FConnection := TFDConnection.Create(nil);
   FConnection.LoginPrompt := False;
+  FConnection.DriverName := AParams.DriverID;
 
-  // Carrega as configs
-  FParams.LoadFromSettings;
   FConnection.Params.Text := FParams.GetParamsAsString;
+end;
+
+procedure TConnection.CreateMigrationDatabase(APath: string);
+var
+  FDConnection: TFDConnection;
+begin
+  FDConnection := TFDConnection.Create(nil);
+  try
+    FDConnection.Params.Clear;
+    FDConnection.DriverName := 'SQLite';
+    FDConnection.Params.Add('Database=' + APath);
+    FDConnection.Params.Add('LockingMode=Normal');
+    FDConnection.LoginPrompt := False;
+
+    FDConnection.Connected := True;
+  finally
+    FDConnection.Free;
+  end;
 end;
 
 destructor TConnection.Destroy;
@@ -50,7 +80,7 @@ begin
   FConnection.Free;
 end;
 
-class function TConnection.new(AParams: IConnectionParams): IConnection;
+class function TConnection.new(AParams: TConnectionParams): IConnection;
 begin
   Result := Self.Create(AParams);
 end;
@@ -58,7 +88,11 @@ end;
 function TConnection.TestConnection: Boolean;
 begin
   try
-    Result := FConnection.Connected;
+    FConnection.Connected := True;
+    if FConnection.Connected then
+      Result := True
+    else
+      Result := False;
   except
     Result := False;
   end;

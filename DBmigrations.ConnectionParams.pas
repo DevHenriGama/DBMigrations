@@ -202,7 +202,7 @@ begin
     FUserName := GetConfiguracao('User');
     FPassword := GetConfiguracao('Passaword');
     FCharacterSet := GetConfiguracao('CharacterSet');
-    FProtocol := GetConfiguracao('Protol');
+    FProtocol := GetConfiguracao('Protocol');
   end;
 
 end;
@@ -229,7 +229,7 @@ begin
     SetConfiguracao('User', FUserName);
     SetConfiguracao('Passaword', FPassword);
     SetConfiguracao('CharacterSet', FCharacterSet);
-    SetConfiguracao('Protol', FProtocol);
+    SetConfiguracao('Protocol', FProtocol);
   end;
 end;
 

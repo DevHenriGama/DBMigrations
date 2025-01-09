@@ -11,7 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
@@ -23,8 +23,13 @@ object Form1: TForm1
     TabOrder = 0
     OnClick = Button1Click
   end
-  object FDConnection1: TFDConnection
-    Left = 544
-    Top = 400
+  object Button2: TButton
+    Left = 64
+    Top = 160
+    Width = 75
+    Height = 25
+    Caption = 'Button2'
+    TabOrder = 1
+    OnClick = Button2Click
   end
 end

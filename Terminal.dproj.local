@@ -1,19 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024/12/31 14:28:42.199,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/12/31 14:29:16.652,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.pas=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2024/12/31 14:29:16.652,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.dfm=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>2024/12/31 14:29:33.626,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.dproj=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
-    <Transaction>2024/12/31 14:29:54.753,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.pas</Transaction>
-    <Transaction>2024/12/31 14:29:54.753,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.dfm=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.dfm</Transaction>
-    <Transaction>2024/12/31 14:30:59.661,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\PASTerminal.dfm=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.dfm</Transaction>
-    <Transaction>2024/12/31 14:30:59.661,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\PASTerminal.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.pas</Transaction>
-    <Transaction>2024/12/31 14:33:18.474,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.DBConnection.pas</Transaction>
-    <Transaction>2024/12/31 14:33:18.489,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Interactions.pas</Transaction>
-    <Transaction>2024/12/31 14:33:18.503,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Interfaces.pas</Transaction>
-    <Transaction>2024/12/31 14:33:18.517,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Settings.pas</Transaction>
-    <Transaction>2024/12/31 15:49:55.764,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.ConnectionParams.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.DBConnection.pas</Transaction>
-    <Transaction>2024/12/31 15:56:31.925,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Connection.pas</Transaction>
+	<Transactions>
+    <Transaction>2024/12/31 14:28:42.000.199,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/12/31 14:29:16.000.652,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.dfm=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/12/31 14:29:16.000.652,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.pas=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/12/31 14:29:33.000.626,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.dproj=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2024/12/31 14:29:54.000.753,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.dfm=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.dfm</Transaction>
+    <Transaction>2024/12/31 14:29:54.000.753,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Fs.pas</Transaction>
+    <Transaction>2024/12/31 14:30:59.000.661,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\PASTerminal.dfm=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.dfm</Transaction>
+    <Transaction>2024/12/31 14:30:59.000.661,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\PASTerminal.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Terminal.pas</Transaction>
+    <Transaction>2024/12/31 14:33:18.000.503,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Interfaces.pas</Transaction>
+    <Transaction>2024/12/31 14:33:18.000.517,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Settings.pas</Transaction>
+    <Transaction>2024/12/31 14:33:18.000.489,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Interactions.pas</Transaction>
+    <Transaction>2024/12/31 14:33:18.000.474,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.DBConnection.pas</Transaction>
+    <Transaction>2024/12/31 15:49:55.000.764,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.ConnectionParams.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.DBConnection.pas</Transaction>
+    <Transaction>2024/12/31 15:56:31.000.925,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Connection.pas</Transaction>
+    <Transaction>2025/01/08 17:01:08.000.759,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.Migrations.pas</Transaction>
+    <Transaction>2025/01/09 09:18:32.572,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Unit1.pas</Transaction>
+    <Transaction>2025/01/09 09:19:55.711,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.DatabaseScheemas.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Unit1.pas</Transaction>
+    <Transaction>2025/01/09 09:36:51.100,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Unit1.pas</Transaction>
+    <Transaction>2025/01/09 09:38:13.180,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBmigrations.DBQuery.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>
