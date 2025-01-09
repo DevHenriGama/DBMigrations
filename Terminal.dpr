@@ -10,7 +10,8 @@ uses
   DBmigrations.Connection in 'DBmigrations.Connection.pas',
   DBmigrations.Migrations in 'DBmigrations.Migrations.pas',
   DBmigrations.DatabaseScheemas in 'DBmigrations.DatabaseScheemas.pas',
-  DBmigrations.DBQuery in 'DBmigrations.DBQuery.pas';
+  DBmigrations.DBQuery in 'DBmigrations.DBQuery.pas',
+  DBmigrations.Entity in 'DBmigrations.Entity.pas';
 
 {$R *.res}
 

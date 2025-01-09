@@ -18,6 +18,7 @@ uses
   FireDAC.Comp.Client,
   FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef,
+  FireDAC.Phys.FB,
   DBmigrations.ConnectionParams;
 
 type
@@ -37,7 +38,7 @@ type
 implementation
 
 uses
-  System.IOUtils;
+  System.IOUtils, System.SysUtils, Vcl.Dialogs;
 
 { TConnection }
 
@@ -87,14 +88,14 @@ end;
 
 function TConnection.TestConnection: Boolean;
 begin
+  Result := False;
   try
     FConnection.Connected := True;
     if FConnection.Connected then
-      Result := True
-    else
-      Result := False;
+      Result := True;
   except
-    Result := False;
+    on E: exception do
+      ShowMessage(E.ToString);
   end;
 end;
 

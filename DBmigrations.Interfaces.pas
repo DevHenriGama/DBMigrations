@@ -20,6 +20,7 @@ type
     procedure SaveToSettings;
     procedure LoadFromSettings;
     function GetParamsAsString: string;
+    function GetTarget: IConnectionParams;
   end;
 
   IConfigManager = interface

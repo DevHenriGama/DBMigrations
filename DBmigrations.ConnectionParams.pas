@@ -40,7 +40,8 @@ type
     property CharacterSet: string read FCharacterSet write FCharacterSet;
     property Protocol: string read FProtocol write FProtocol;
     procedure SaveToSettings;
-    procedure LoadFromSettings;
+    procedure LoadFromSettings; overload;
+    function GetTarget: IConnectionParams;
     function GetParamsAsString: string;
 
   end;
@@ -182,6 +183,12 @@ begin
   finally
     Params.Free;
   end;
+end;
+
+function TConnectionParams.GetTarget: IConnectionParams;
+begin
+  Self.LoadFromSettings;
+  Result := Self;
 end;
 
 procedure TConnectionParams.LoadFromSettings;
