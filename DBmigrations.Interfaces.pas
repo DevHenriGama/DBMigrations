@@ -41,7 +41,7 @@ type
   IMigrations = interface
     ['{CBC6B9B7-2E78-40D9-817A-4CD21795BF2B}']
     procedure RunMigrations;
-    procedure CreateMigration;
+    procedure CreateMigration(AName: string);
   end;
 
   IDatabaseScheema = interface

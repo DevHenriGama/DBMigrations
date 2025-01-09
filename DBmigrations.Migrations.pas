@@ -15,14 +15,17 @@ type
   const
     _DBNAME: string = 'migrations.db';
     function DBPath: String;
+    function MigrationsDirPath: string;
     procedure Initialize;
     procedure CreateDatabase;
+    function CreateMigrationFile(AFileName: string): string;
+    function MigrationFileName(AName: string): string;
   public
     constructor Create;
     destructor Destroy; override;
     class function New: IMigrations;
     procedure RunMigrations;
-    procedure CreateMigration;
+    procedure CreateMigration(AName: string);
   end;
 
 function Migrations: IMigrations;
@@ -48,7 +51,9 @@ begin
     Database := DBPath;
   end;
 
-  CreateDatabase;
+  if not FileExists(DBPath) then
+    CreateDatabase;
+
   Initialize;
 end;
 
@@ -56,9 +61,6 @@ procedure TMigrations.CreateDatabase;
 var
   Connection: IConnection;
 begin
-  if FileExists(DBPath) then
-    Exit;
-
   Connection := TConnection.New(MigrationParams);
   Connection.CreateMigrationDatabase(DBPath);
 
@@ -67,12 +69,24 @@ begin
     SQL.AddStrings(DBScheemas.MigrationDatabaseScheema);
     ExecSQL;
   end;
-
 end;
 
-procedure TMigrations.CreateMigration;
+procedure TMigrations.CreateMigration(AName: string);
+var
+  FFileName: string;
 begin
+  FFileName := CreateMigrationFile(AName);
 
+  // Faz a query registrando com o nome
+end;
+
+function TMigrations.CreateMigrationFile(AFileName: string): String;
+var
+  FName: string;
+begin
+  FName := MigrationFileName(AFileName);
+
+  Result := FName;
 end;
 
 function TMigrations.DBPath: String;
@@ -89,6 +103,16 @@ end;
 procedure TMigrations.Initialize;
 begin
   TConnection.New(MigrationParams).TestConnection;
+end;
+
+function TMigrations.MigrationFileName(AName: string): string;
+begin
+  Result := Format('%s_%s.txt', [AName, FormatDateTime('yyyy-mm-dd_hh-nn-ss', Now)]);
+end;
+
+function TMigrations.MigrationsDirPath: string;
+begin
+  Result := ExtractFilePath(ParamStr(0)) + 'migrations/'
 end;
 
 class function TMigrations.New: IMigrations;

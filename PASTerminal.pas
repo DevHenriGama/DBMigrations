@@ -35,7 +35,7 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-TMigrations.New.RunMigrations;
+TMigrations.New.CreateMigration('changeUsers');
 end;
 
 end.
