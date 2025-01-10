@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{FB3C58E8-771B-4542-BDC9-A756F8DE6D80}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DBMigrations.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DBMigrationTool.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DBMigrations">
+        <MSBuild Projects="DBMigrations.dproj"/>
+    </Target>
+    <Target Name="DBMigrations:Clean">
+        <MSBuild Projects="DBMigrations.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DBMigrations:Make">
+        <MSBuild Projects="DBMigrations.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DBMigrationTool">
+        <MSBuild Projects="DBMigrationTool.dproj"/>
+    </Target>
+    <Target Name="DBMigrationTool:Clean">
+        <MSBuild Projects="DBMigrationTool.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DBMigrationTool:Make">
+        <MSBuild Projects="DBMigrationTool.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DBMigrations;DBMigrationTool"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DBMigrations:Clean;DBMigrationTool:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DBMigrations:Make;DBMigrationTool:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
