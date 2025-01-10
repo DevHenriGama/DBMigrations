@@ -5,15 +5,15 @@ program DBMigrations;
 
 uses
   System.SysUtils,
-  DBMigrations.Connection in 'DBmigrations.Connection.pas',
-  DBMigrations.ConnectionParams in 'DBmigrations.ConnectionParams.pas',
-  DBMigrations.DatabaseScheemas in 'DBmigrations.DatabaseScheemas.pas',
-  DBMigrations.DBQuery in 'DBmigrations.DBQuery.pas',
-  DBMigrations.Entity in 'DBmigrations.Entity.pas',
-  DBMigrations.Interactions in 'DBmigrations.Interactions.pas',
-  DBMigrations.Interfaces in 'DBmigrations.Interfaces.pas',
-  DBMigrations.Migrations in 'DBmigrations.Migrations.pas',
-  DBMigrations.Settings in 'DBmigrations.Settings.pas';
+  DBmigrations.Connection in 'DBmigrations.Connection.pas',
+  DBmigrations.ConnectionParams in 'DBmigrations.ConnectionParams.pas',
+  DBmigrations.DatabaseScheemas in 'DBmigrations.DatabaseScheemas.pas',
+  DBmigrations.DBQuery in 'DBmigrations.DBQuery.pas',
+  DBmigrations.Entity in 'DBmigrations.Entity.pas',
+  DBmigrations.Interactions in 'DBmigrations.Interactions.pas',
+  DBmigrations.Interfaces in 'DBmigrations.Interfaces.pas',
+  DBmigrations.Migrations in 'DBmigrations.Migrations.pas',
+  DBmigrations.Settings in 'DBmigrations.Settings.pas';
 
 function SettingsInitialized: Boolean;
 var
@@ -93,17 +93,8 @@ begin
 
     if ParamStr(1) = '--create' then
     begin
-
-      if not SettingsInitialized then
-      begin
-        Writeln(' ');
-        Writeln('  Migrations not initialized.');
-        Exit;
-      end;
-
       if ParamStr(2) <> '' then
       begin
-
         TMigrations.New.CreateMigration(ParamStr(2));
         Writeln(' ');
         Writeln('  Migration Created');
@@ -125,7 +116,7 @@ begin
 
       TMigrations.New.RunMigrations;
       Writeln(' ');
-      Writeln('  Migrations Runned');
+      Writeln(' Migrations Runned');
     end;
 
   end
