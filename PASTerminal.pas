@@ -29,7 +29,22 @@ implementation
 {$R *.dfm}
 
 procedure TForm1.Button1Click(Sender: TObject);
+var
+  sOK: Boolean;
+  FConfigs: TSettings;
 begin
+  FConfigs := TSettings.Create;
+  try
+    sOK := FConfigs.FileInitialized;
+  finally
+    FConfigs.Free;
+  end;
+
+  if sOK then
+  begin
+    ShowMessage('Já criado');
+    Exit;
+  end;
   TConnectionParams.New(dtFirebird).SaveToSettings;
 end;
 

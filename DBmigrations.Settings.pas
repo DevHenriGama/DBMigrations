@@ -32,6 +32,7 @@ type
     function GetConfiguracao(AChave: string): string;
     function HasSettingsFile: Boolean;
     function ContainsKey(AKey: String): Boolean;
+    function FileInitialized: Boolean;
 
   end;
 
@@ -40,7 +41,7 @@ function Settings: IConfigManager;
 implementation
 
 uses
-  System.Classes;
+  System.Classes, Vcl.Dialogs;
 
 { TMACConfig }
 
@@ -53,9 +54,8 @@ function TSettings.ContainsKey(AKey: String): Boolean;
 begin
   Result := False;
 
-  if HasSettingsFile then
+  if FileExists(FFilePath) then
     Result := FJSON.GetValue(AKey) <> NIL;
-
 end;
 
 constructor TSettings.Create;
@@ -81,6 +81,19 @@ begin
     Result := Value;
 end;
 
+function TSettings.FileInitialized: Boolean;
+begin
+  Result := False;
+
+  if not HasSettingsFile then
+    Exit;
+
+  if not ContainsKey('DriveID') then
+    Exit;
+
+  Result := True;
+end;
+
 function TSettings.Decrypt(const Value: string): string;
 begin
   if FUseEncrypt then
@@ -104,6 +117,7 @@ end;
 function TSettings.HasSettingsFile: Boolean;
 begin
   Result := FileExists(FFilePath);
+
 end;
 
 procedure TSettings.SetConfiguracao(AChave, Valor: string);

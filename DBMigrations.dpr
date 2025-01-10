@@ -15,6 +15,21 @@ uses
   DBMigrations.Migrations in 'DBmigrations.Migrations.pas',
   DBMigrations.Settings in 'DBmigrations.Settings.pas';
 
+function SettingsInitialized: Boolean;
+var
+  sOk: Boolean;
+  FSett: TSettings;
+begin
+  FSett := TSettings.Create;
+  try
+    sOk := FSett.FileInitialized;
+  finally
+    FSett.Free;
+  end;
+
+  Result := sOk;
+end;
+
 begin
   Writeln('Welcome DBMigrations 1.0');
 
@@ -52,8 +67,7 @@ begin
         Exit;
       end;
 
-      if Settings.HasSettingsFile and TConnectionParams.New().ParamsInitalizared
-      then
+      if SettingsInitialized then
       begin
         Writeln('Already initializated migrations.');
         Exit;
@@ -80,6 +94,13 @@ begin
     if ParamStr(1) = '--create' then
     begin
 
+      if not SettingsInitialized then
+      begin
+        Writeln(' ');
+        Writeln('  Migrations not initialized.');
+        Exit;
+      end;
+
       if ParamStr(2) <> '' then
       begin
 
@@ -95,7 +116,7 @@ begin
 
     if ParamStr(1) = '--run' then
     begin
-      if not Settings.HasSettingsFile then
+      if not SettingsInitialized then
       begin
         Writeln(' ');
         Writeln('  Migrations not initialized.');

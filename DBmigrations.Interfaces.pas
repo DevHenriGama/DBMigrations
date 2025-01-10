@@ -30,6 +30,7 @@ type
     function GetConfiguracao(AChave: string): string;
     function HasSettingsFile: Boolean;
     function ContainsKey(AKey: String): Boolean;
+    function FileInitialized: Boolean;
 
   end;
 
