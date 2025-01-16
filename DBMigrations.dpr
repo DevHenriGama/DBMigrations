@@ -5,17 +5,17 @@ program DBMigrations;
 
 uses
   System.SysUtils,
-  DBmigrations.Connection in 'src\DBmigrations.Connection.pas',
-  DBmigrations.ConnectionParams in 'src\DBmigrations.ConnectionParams.pas',
-  DBmigrations.DatabaseScheemas in 'src\DBmigrations.DatabaseScheemas.pas',
-  DBmigrations.DBQuery in 'src\DBmigrations.DBQuery.pas',
-  DBmigrations.Entity in 'src\DBmigrations.Entity.pas',
-  DBmigrations.Interactions in 'src\DBmigrations.Interactions.pas',
-  DBmigrations.Interfaces in 'src\DBmigrations.Interfaces.pas',
-  DBmigrations.Migrations in 'src\DBmigrations.Migrations.pas',
-  DBmigrations.Settings in 'src\DBmigrations.Settings.pas',
-  DBmigrations.ENV in 'src\DBmigrations.ENV.pas',
-  DBmigrations.AdapterLog in 'src\DBmigrations.AdapterLog.pas';
+  DBMigrations.Connection in 'src\DBmigrations.Connection.pas',
+  DBMigrations.ConnectionParams in 'src\DBmigrations.ConnectionParams.pas',
+  DBMigrations.DatabaseScheemas in 'src\DBmigrations.DatabaseScheemas.pas',
+  DBMigrations.DBQuery in 'src\DBmigrations.DBQuery.pas',
+  DBMigrations.Entity in 'src\DBmigrations.Entity.pas',
+  DBMigrations.Interactions in 'src\DBmigrations.Interactions.pas',
+  DBMigrations.Interfaces in 'src\DBmigrations.Interfaces.pas',
+  DBMigrations.Migrations in 'src\DBmigrations.Migrations.pas',
+  DBMigrations.Settings in 'src\DBmigrations.Settings.pas',
+  DBMigrations.ENV in 'src\DBmigrations.ENV.pas',
+  DBMigrations.AdapterLog in 'src\DBmigrations.AdapterLog.pas';
 
 function SettingsInitialized: Boolean;
 var
@@ -119,6 +119,28 @@ begin
       TMigrations.New.RunMigrations;
       Writeln(' ');
       Writeln(' Migrations Runned');
+    end;
+
+    if ParamStr(1) = '--test' then
+    begin
+      if not SettingsInitialized then
+      begin
+        Writeln('Migrations not initilized!');
+        Exit;
+      end;
+
+      if TConnection.New(TConnectionParams(TConnectionParams.New(dtOther)
+        .GetTarget)).TestConnection then
+      begin
+        Writeln(' ');
+        Writeln(' Database Target is OK');
+      end
+      else
+      begin
+        Writeln(' ');
+        Writeln(' Test to target DB was a failed!! :(');
+      end;
+
     end;
 
   end

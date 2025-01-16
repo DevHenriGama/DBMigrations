@@ -96,6 +96,8 @@ begin
     FConnection.Connected := True;
     if FConnection.Connected then
       Result := True;
+    sLog.Add(Format('%s Connection was tested with Sucess %s',
+      [Self.ClassName, FParams.DriverID]), TLogLevel.Info);
   except
     on E: Exception do
       sLog.Add(E.ToString);
