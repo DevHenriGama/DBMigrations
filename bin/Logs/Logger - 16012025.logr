@@ -3,3 +3,13 @@
 | [16/01/2025] | [Info] | System | - TMigrations  MIGRATION WAS CREATED IN DB WITH NAME = new_2025-01-16_08-29-30.txt | [08:29:30] |
 | [16/01/2025] | [Info] | System | - TConnection Connection was tested with Sucess SQLite | [08:33:22] |
 | [16/01/2025] | [Info] | System | - TConnection Connection was tested with Sucess SQLite | [08:34:01] |
+| [16/01/2025] | [Info] | System | - TConnection Connection was tested with Sucess SQLite | [08:43:55] |
+| [16/01/2025] | [Info] | System | - TMigrations  Clearned Unseless migrations with success! | [08:43:55] |
+| [16/01/2025] | [Info] | System | - TConnection Connection was tested with Sucess SQLite | [08:43:55] |
+| [16/01/2025] | [Info] | System | - TMigrations  Migrations already to run | [08:43:55] |
+| [16/01/2025] | [Info] | System | - TMigrations  MIGRATION WITH ID = 2 WAS CHANGED TO COMPLETED IN DB | [08:43:56] |
+| [16/01/2025] | [Info] | System | - TConnection Connection was tested with Sucess SQLite | [08:50:07] |
+| [16/01/2025] | [Info] | System | - TMigrations  MIGRATION FILE new_2025-01-16_08-29-30 - Copy.txt WAS DELETED | [08:50:07] |
+| [16/01/2025] | [Info] | System | - TMigrations  Clearned Unseless migrations with success! | [08:50:07] |
+| [16/01/2025] | [Info] | System | - TConnection Connection was tested with Sucess SQLite | [08:50:07] |
+| [16/01/2025] | [Info] | System | - TMigrations  Migrations already to run | [08:50:07] |

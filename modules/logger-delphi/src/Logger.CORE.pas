@@ -4,7 +4,7 @@ interface
 
 uses
 
-  System.SysUtils, Logger.Types;
+  Logger.Types;
 
 type
 
@@ -35,6 +35,8 @@ type
 
 implementation
 
+uses
+  System.SysUtils;
 
 { TLogger }
 
@@ -51,8 +53,8 @@ begin
   Append(FLogFile);
   try
     Writeln(FLogFile, Format('| [%s] | %s | %s | - %s | [%s] |',
-      [DateToStr(Now), DefType(aType), LUser, NormalizeInput(aLogMessage),
-      TimeToStr(Now)]));
+      [FormatDateTime('DD/MM/YYYY', Now), DefType(aType), LUser,
+      NormalizeInput(aLogMessage), FormatDateTime('hh:mm:ss', Now)]));
   finally
     CloseFile(FLogFile);
   end;

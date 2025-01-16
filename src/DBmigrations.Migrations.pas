@@ -211,8 +211,11 @@ begin
   if not DirectoryExists(MigrationsDirPath) then
     CreateDir(MigrationsDirPath);
 
+{$IFDEF LINUX}
+  TFile.WriteAllText(Format('%s/%s', [MigrationsDirPath, FName]), '');
+{$ELSE}
   TFile.WriteAllText(Format('%s\%s', [MigrationsDirPath, FName]), '');
-
+{$ENDIF}
   Result := FName;
 
   sLog.Add(Format('%s  MIGRATION FILE WAS CREATED WITH NAME = %s',
@@ -296,15 +299,19 @@ begin
   begin
     for Migration in FMigrationList do
     begin
-      try
-        Close;
-        SQL.Clear;
-        SQL.Add(Migration.Query);
-        ExecSQL;
+      if not Migration.Query.IsEmpty then
+      begin
 
-        CompleteMigration(Migration.ID);
-      except
-        Break;
+        try
+          Close;
+          SQL.Clear;
+          SQL.Add(Migration.Query);
+          ExecSQL;
+
+          CompleteMigration(Migration.ID);
+        except
+          Break;
+        end;
       end;
     end;
   end;

@@ -50,7 +50,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Classes, DBmigrations.Settings;
+  System.SysUtils, System.Classes, DBmigrations.Settings, Logger.Types;
 
 { TConnectionParams }
 
@@ -246,7 +246,7 @@ begin
   end;
 
   sLog.Add(Format('%s CONFIG SET ALL UP WITH DRIVE %s',
-    [Self.ClassName, FDriverID]));
+    [Self.ClassName, FDriverID]), TLogLevel.Info);
 end;
 
 procedure TConnectionParams.SaveToSettings;
