@@ -7,7 +7,8 @@ uses
   DBmigrations.ConnectionParams,
   DBmigrations.DBQuery,
   DBmigrations.DatabaseScheemas,
-  System.Classes, DBmigrations.Entity, System.Generics.Collections;
+  System.Classes, DBmigrations.Entity, System.Generics.Collections,
+  DBmigrations.AdapterLog;
 
 type
   TMigrations = class(TInterfacedObject, IMigrations)
@@ -45,7 +46,7 @@ function Migrations: IMigrations;
 implementation
 
 uses
-  System.SysUtils, DBmigrations.Connection, System.IOUtils;
+  System.SysUtils, DBmigrations.Connection, System.IOUtils, Logger.Types;
 
 { TMigrations }
 
@@ -69,6 +70,9 @@ begin
     Exit;
 
   Result := True;
+
+  sLog.Add(TMigrations.ClassName + '  Migrations already to run',
+    TLogLevel.Info);
 end;
 
 procedure TMigrations.ClearUnuselessMigrations;
@@ -91,7 +95,13 @@ begin
     for I := 0 to FMigrationsFilesName.Count - 1 do
     begin
       if not Locate('MIGRATION_NAME', FMigrationsFilesName[I], []) then
+      begin
         DeleteFile(MigrationsDirPath + FMigrationsFilesName[I]);
+
+        sLog.Add(Format('%s  MIGRATION FILE %s WAS DELETED',
+          [TMigrations.ClassName, FMigrationsFilesName[I]]), TLogLevel.Info);
+      end;
+
     end;
 
     First;
@@ -101,7 +111,13 @@ begin
       FMigration := MigrationsDirPath + FieldByName('MIGRATION_NAME').AsString;
 
       if not FileExists(FMigration) then
+      begin
+        sLog.Add(Format('%s  MIGRATION IN DB %s WAS DELETED',
+          [TMigrations.ClassName, FieldByName('MIGRATION_NAME').AsString]),
+          TLogLevel.Info);
+
         FIDsNotExist.Add(FieldByName('ID').AsInteger);
+      end;
 
       Next;
     end;
@@ -122,6 +138,9 @@ begin
     ExecSQL;
   end;
 
+  sLog.Add(Format('%s  Clearned Unseless migrations with success!',
+    [TMigrations.ClassName]), TLogLevel.Info);
+
   FIDsNotExist.Free;
 end;
 
@@ -138,6 +157,9 @@ begin
     ParamByName('id').AsInteger := AID;
     ExecSQL;
   end;
+
+  sLog.Add(Format('%s  MIGRATION WITH ID = %s WAS CHANGED TO COMPLETED IN DB',
+    [TMigrations.ClassName, IntToStr(AID)]), TLogLevel.Info);
 end;
 
 constructor TMigrations.Create;
@@ -177,8 +199,6 @@ var
   FFileName: string;
 begin
   FFileName := CreateMigrationFile(AName);
-  Writeln(FFileName);
-
   RegisterMigration(FFileName);
 end;
 
@@ -191,9 +211,15 @@ begin
   if not DirectoryExists(MigrationsDirPath) then
     CreateDir(MigrationsDirPath);
 
+{$IFDEF LINUX}
+  TFile.WriteAllText(Format('%s/%s', [MigrationsDirPath, FName]), '');
+{$ELSE}
   TFile.WriteAllText(Format('%s\%s', [MigrationsDirPath, FName]), '');
-
+{$ENDIF}
   Result := FName;
+
+  sLog.Add(Format('%s  MIGRATION FILE WAS CREATED WITH NAME = %s',
+    [TMigrations.ClassName, Result]), TLogLevel.Info);
 end;
 
 function TMigrations.DBPath: String;
@@ -273,15 +299,19 @@ begin
   begin
     for Migration in FMigrationList do
     begin
-      try
-        Close;
-        SQL.Clear;
-        SQL.Add(Migration.Query);
-        ExecSQL;
+      if not Migration.Query.IsEmpty then
+      begin
 
-        CompleteMigration(Migration.ID);
-      except
-        Break;
+        try
+          Close;
+          SQL.Clear;
+          SQL.Add(Migration.Query);
+          ExecSQL;
+
+          CompleteMigration(Migration.ID);
+        except
+          Break;
+        end;
       end;
     end;
   end;
@@ -298,6 +328,9 @@ begin
     ParamByName('name').AsString := AFileName;
     ExecSQL;
   end;
+
+  sLog.Add(Format('%s  MIGRATION WAS CREATED IN DB WITH NAME = %s',
+    [TMigrations.ClassName, AFileName]), TLogLevel.Info);
 end;
 
 procedure TMigrations.RunMigrations;

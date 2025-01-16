@@ -3,7 +3,7 @@ unit DBmigrations.Interfaces;
 interface
 
 uses
-  System.Classes, FireDAC.Comp.Client;
+  System.Classes, FireDAC.Comp.Client, Logger.Types;
 
 type
   IInteractions = interface
@@ -55,6 +55,11 @@ type
   IDBQuery = interface
     ['{897670B1-0980-4678-B22C-6B8AB5A9AE18}']
     function Query: TFDQuery;
+  end;
+
+  IAdapterLog = interface
+    ['{0DD2FA3B-3211-4C46-9AB1-BB3DF7D61307}']
+    procedure Add(ALog: string; AType: TLogLevel = Error);
   end;
 
 implementation

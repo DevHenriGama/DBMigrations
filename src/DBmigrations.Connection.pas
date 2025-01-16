@@ -38,7 +38,7 @@ type
 implementation
 
 uses
-  System.IOUtils, System.SysUtils;
+  System.IOUtils, System.SysUtils, DBmigrations.AdapterLog, Logger.Types;
 
 { TConnection }
 
@@ -70,6 +70,9 @@ begin
     FDConnection.LoginPrompt := False;
 
     FDConnection.Connected := True;
+
+    sLog.Add('Created MigrationsDB', TLogLevel.Info);
+
   finally
     FDConnection.Free;
   end;
@@ -93,8 +96,11 @@ begin
     FConnection.Connected := True;
     if FConnection.Connected then
       Result := True;
+    sLog.Add(Format('%s Connection was tested with Sucess %s',
+      [Self.ClassName, FParams.DriverID]), TLogLevel.Info);
   except
-    Result := False;
+    on E: Exception do
+      sLog.Add(E.ToString);
   end;
 end;
 

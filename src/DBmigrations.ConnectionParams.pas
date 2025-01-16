@@ -3,7 +3,7 @@ unit DBmigrations.ConnectionParams;
 interface
 
 uses
-  DBmigrations.Interfaces;
+  DBmigrations.Interfaces, DBmigrations.AdapterLog;
 
 type
   TDatabaseType = (dtMySQL, dtPostgreSQL, dtSQLServer, dtSQLite, dtOracle,
@@ -50,7 +50,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Classes, DBmigrations.Settings;
+  System.SysUtils, System.Classes, DBmigrations.Settings, Logger.Types;
 
 { TConnectionParams }
 
@@ -244,6 +244,9 @@ begin
     SetConfiguracao('CharacterSet', FCharacterSet);
     SetConfiguracao('Protocol', FProtocol);
   end;
+
+  sLog.Add(Format('%s CONFIG SET ALL UP WITH DRIVE %s',
+    [Self.ClassName, FDriverID]), TLogLevel.Info);
 end;
 
 procedure TConnectionParams.SaveToSettings;

@@ -1,0 +1,22 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2025-01-15T16:23:51.6098131-03:00",
+	"installedModules": {
+		"https://github.com/devhenrigama/envmanager-delphi": {
+			"name": "envmanager-delphi",
+			"version": "main",
+			"hash": "2a4c5ffa0abb2779891e69a8f28100f9",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/devhenrigama/logger-delphi": {
+			"name": "logger-delphi",
+			"version": "main",
+			"hash": "fe579410da8eb2f3ab56576bddb9f751",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

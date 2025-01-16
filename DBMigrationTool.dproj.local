@@ -1,11 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2025/01/10 16:23:03.855,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/01/10 16:23:54.289,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\MigrationTool.pas=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2025/01/10 16:23:54.289,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\MigrationTool.fmx=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
-    <Transaction>2025/01/10 16:24:32.523,C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBMigrationTool.dproj=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+	<Transactions>
+    <Transaction>2025/01/10 16:23:03.000.855,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/01/10 16:23:54.000.289,C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\MigrationTool.pas</Transaction>
+    <Transaction>2025/01/10 16:23:54.000.289,C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.fmx=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\MigrationTool.fmx</Transaction>
+    <Transaction>2025/01/10 16:24:32.000.523,C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\DBMigrationTool.dproj</Transaction>
+    <Transaction>2025/01/10 16:25:33.000.975,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.Connection.pas</Transaction>
+    <Transaction>2025/01/10 16:25:33.000.987,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.ConnectionParams.pas</Transaction>
+    <Transaction>2025/01/10 16:25:33.000.998,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.DatabaseScheemas.pas</Transaction>
+    <Transaction>2025/01/10 16:25:34.000.068,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.Settings.pas</Transaction>
+    <Transaction>2025/01/10 16:25:34.000.045,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.Interfaces.pas</Transaction>
+    <Transaction>2025/01/10 16:25:34.000.021,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.Entity.pas</Transaction>
+    <Transaction>2025/01/10 16:25:34.000.010,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.DBQuery.pas</Transaction>
+    <Transaction>2025/01/10 16:25:34.000.033,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.Interactions.pas</Transaction>
+    <Transaction>2025/01/10 16:25:34.000.057,=C:\Users\Dev\Desktop\DBMigrations\DBMigrations\src\DBmigrations.Migrations.pas</Transaction>
   </Transactions>
-  <ActiveMobileDevice>   <NoProfile iOSSimulator="iPhone5"/>
-  </ActiveMobileDevice>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5"/>
+	</ActiveMobileDevice>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="android-support-v4.dex.jar"/>
+    <File Path="cloud-messaging.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads-base.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads-identifier.16.0.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads-lite.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-ads.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-analytics-impl.16.0.8.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-analytics.16.0.8.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-base.16.0.1.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-basement.16.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-gass.17.2.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-identity.16.0.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-maps.16.1.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-measurement-base.16.4.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-measurement-sdk-api.16.4.0.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-stats.16.0.1.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-tagmanager-v4-impl.16.0.8.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-tasks.16.0.1.dex.jar"/>
+    <File Path="com-google-android-gms.play-services-wallet.16.0.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-analytics.16.4.0.dex.jar"/>
+    <File Path="com-google-firebase.firebase-common.16.1.0.dex.jar"/>
+    <File Path="com-google-firebase.firebase-iid-interop.16.0.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-iid.17.1.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-measurement-connector.17.0.1.dex.jar"/>
+    <File Path="com-google-firebase.firebase-messaging.17.5.0.dex.jar"/>
+    <File Path="fmx.dex.jar"/>
+    <File Path="google-play-billing.dex.jar"/>
+    <File Path="google-play-licensing.dex.jar"/>
+    <File Path="src"/>
+    <File Path="src\DBmigrations.Connection.pas"/>
+    <File Path="src\DBmigrations.ConnectionParams.pas"/>
+    <File Path="src\DBmigrations.DatabaseScheemas.pas"/>
+    <File Path="src\DBmigrations.DBQuery.pas"/>
+    <File Path="src\DBmigrations.Entity.pas"/>
+    <File Path="src\DBmigrations.Interactions.pas"/>
+    <File Path="src\DBmigrations.Interfaces.pas"/>
+    <File Path="src\DBmigrations.Migrations.pas"/>
+    <File Path="src\DBmigrations.Settings.pas"/>
+    <File Path="MigrationTool.pas"/>
+    <File Path="MigrationTool.fmx"/>
+  </ProjectSortOrder>
 </BorlandProject>

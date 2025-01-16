@@ -1,0 +1,4 @@
+| [15/01/2025] | [Error] | System | - TConnectionParams CONFIG SET ALL UP WITH DRIVE SQLite | [17:46:00] |
+| [15/01/2025] | [Info] | System | - Created MigrationsDB | [17:46:43] |
+| [15/01/2025] | [Info] | System | - TMigrations  MIGRATION FILE WAS CREATED WITH NAME = new_2025-01-15_17-46-43.txt | [17:46:43] |
+| [15/01/2025] | [Info] | System | - TMigrations  MIGRATION WAS CREATED IN DB WITH NAME = new_2025-01-15_17-46-43.txt | [17:46:43] |
