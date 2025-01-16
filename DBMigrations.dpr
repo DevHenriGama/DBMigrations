@@ -13,7 +13,9 @@ uses
   DBmigrations.Interactions in 'src\DBmigrations.Interactions.pas',
   DBmigrations.Interfaces in 'src\DBmigrations.Interfaces.pas',
   DBmigrations.Migrations in 'src\DBmigrations.Migrations.pas',
-  DBmigrations.Settings in 'src\DBmigrations.Settings.pas';
+  DBmigrations.Settings in 'src\DBmigrations.Settings.pas',
+  DBmigrations.ENV in 'src\DBmigrations.ENV.pas',
+  DBmigrations.AdapterLog in 'src\DBmigrations.AdapterLog.pas';
 
 function SettingsInitialized: Boolean;
 var

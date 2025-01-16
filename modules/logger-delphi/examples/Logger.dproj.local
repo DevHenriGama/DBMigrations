@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2025/01/14 14:54:05.928,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/01/14 14:54:31.532,C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\examples\uMain.dfm=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2025/01/14 14:54:31.532,C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\examples\uMain.pas=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/01/14 14:54:38.064,C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\examples\Logger.dproj=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Project2.dproj</Transaction>
+    <Transaction>2025/01/14 14:54:48.136,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\src\Logger.CORE.pas</Transaction>
+    <Transaction>2025/01/14 14:54:48.160,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\src\Logger.Interfaces.pas</Transaction>
+    <Transaction>2025/01/14 14:54:48.184,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\src\Logger.Log.pas</Transaction>
+    <Transaction>2025/01/14 14:54:48.206,=C:\Users\Dev\Documents\Embarcadero\Studio\Projects\Logger\src\Logger.Types.pas</Transaction>
+  </Transactions>
+</BorlandProject>

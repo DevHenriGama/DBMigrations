@@ -1,0 +1,12 @@
+{
+	"name": "DBMigrations",
+	"description": "",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"https://github.com/devhenrigama/envmanager-delphi": ">0.0.0",
+		"https://github.com/devhenrigama/logger-delphi": ">0.0.0"
+	}
+}
